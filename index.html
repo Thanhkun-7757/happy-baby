@@ -6,9 +6,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Antique:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-
+  <link href="styles.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script><link href="https://feeldreams.github.io/heibuka/style.css" rel="stylesheet" type="text/css" />
   <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
+  
   
 <head>
 <title>Mylove</title>
@@ -84,16 +85,22 @@
   
   async function inipesan(){
     var { value: nama } = await swals.fire({
-           title: 'Tên của bé là gì?', input: 'text',
-       });
-       if(nama && nama.length < 11){
-         window.nama = nama;
-         vketikhalo="Hai, " + nama + " 💑";
-         mulainama();
-         } else {
-           await swals.fire('Bộ em hong có tên hả!', 'Tên của người đẹp chỉ chứa 10 ký tự hoii nhaaa, ya!');inipesan();
+        title: 'Tên của bé là gì?',
+        input: 'text',
+    });
+
+    if (nama && nama.trim().toLowerCase() === "thanh") {
+        window.nama = nama;
+        vketikhalo = "Hai, " + nama + " 💑";
+        mulainama();
+    } else if (nama) {
+        await swals.fire('Tên em sai rồi!', 'Nhập đúng thì mới được vào nha khưa khưa!');
+        inipesan();
+    } else {
+        await swals.fire('Bộ em hong có tên hả!', 'Tên của người đẹp chỉ chứa 10 ký tự hoii nhaaa, ya!');
+        inipesan();
     }
-  }
+}
 
   
   var tanya = 'Em có thích món quà này không ? 😳';
